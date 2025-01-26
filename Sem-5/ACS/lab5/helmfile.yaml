@@ -1,0 +1,12 @@
+releases:
+  - name: nginx-dev
+    namespace: dev
+    chart: ./nginx-helm-chart
+    values:
+      - values-dev.yml
+
+  - name: nginx-prod
+    namespace: prod
+    chart: ./nginx-helm-chart
+    values:
+      - values-prod.yml

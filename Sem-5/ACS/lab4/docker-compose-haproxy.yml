@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  backend1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - HTML_FILE=index1.html
+    networks:
+      - lab4_acs
+    ports:
+      - "8081:80"
+
+  backend2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - HTML_FILE=index2.html
+    networks:
+      - lab4_acs
+    ports:
+      - "8082:80"
+
+  haproxy:
+    image: haproxy:latest
+    networks:
+      - lab4_acs
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend1
+      - backend2
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+
+networks:
+  lab4_acs:
+    external: true

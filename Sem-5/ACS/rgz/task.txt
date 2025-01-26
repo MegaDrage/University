@@ -1,0 +1,16 @@
+На 5: nginx/traefik + Prometheus + grafana + telegraf/node_exporter/cadvisor + alertmanager
+DoD:
+
+    Интерфейсы доступны по разным доменам (prometheus, alertmanager, grafana) с https
+
+    Настроен сбор метрик с exporter-ов (node, cadvisor, telegraf) prometheus-ом
+
+    Сделано несколько визуализаций в grafana
+
+    При пересоздании проекта, все настройки и данные должны сохраниться
+
+    Оформить как docker-compose.yml
+
+    Конфигурацию передавать через volume
+
+    На одну из метрик настроен алертинг в один из каналов (telegram, email, web hook, etc...)

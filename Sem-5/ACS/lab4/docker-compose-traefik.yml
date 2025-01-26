@@ -1,0 +1,49 @@
+services:
+  backend1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - HTML_FILE=index1.html
+    networks:
+      - lab4_acs
+    ports:
+      - "8081:80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend1.rule=Host(`backend1.localhost`)"
+      - "traefik.http.services.backend1.loadbalancer.server.port=80"
+
+  backend2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - HTML_FILE=index2.html
+    networks:
+      - lab4_acs
+    ports:
+      - "8082:80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend2.rule=Host(`backend2.localhost`)"
+      - "traefik.http.services.backend2.loadbalancer.server.port=80"
+
+  traefik:
+    container_name: traefik
+    image: traefik:v2.5
+    ports:
+      - 8080:80/tcp 
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro 
+      - ./traefik:/etc/traefik/ 
+      - ./traefik/logs:/logs
+    networks:
+      - lab4_acs 
+    labels:
+      - traefik.enable=true
+    restart: always
+
+networks:
+  lab4_acs:
+    external: true

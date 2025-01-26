@@ -1,0 +1,7 @@
+# playbooks/docker_compose.yml
+---
+- name: Deploy Docker containers using docker-compose
+  hosts: containers
+  become: yes 
+  roles:
+    - docker_compose

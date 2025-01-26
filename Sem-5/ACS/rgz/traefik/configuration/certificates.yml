@@ -1,0 +1,12 @@
+#Dynamic configuration
+tls:
+  certificates:
+    - certFile: "/etc/traefik/certs/cert.crt"
+      keyFile: "/etc/traefik/certs/cert.key"
+      stores:
+        - default
+  # stores:
+  #   default:
+  #     certificates:
+  #       - certFile: "/etc/traefik/certs/cert.crt"
+  #         keyFile: "/etc/traefik/certs/cert.key"

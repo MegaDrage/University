@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    postgresql_user: myuser
+    postgresql_password: mypassword
+    postgresql_database: mydatabase
+  roles:
+    - postgresql_role
